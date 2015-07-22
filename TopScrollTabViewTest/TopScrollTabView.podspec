@@ -10,7 +10,7 @@ s.license      = 'MIT'
 s.author       = { "Fanly Frank" => "fanly1987444@126.com" }
 s.platform     = :ios, "6.0"
 s.ios.deployment_target = "8.1"
-s.source       = { :git => "git@github.com:fanlyfrank/TopScrollTabView.git", :tag => s.version}
-s.source_files  = '*/TSTview.{h,m},*/NSLayoutConstraint+Util.{h,m}'
+s.source       = { :git => "git@github.com:fanlyfrank/TopScrollTabView.git", :tag => s.version, :commit => "f8a58bac1b790edc21375204c6df6bc74d51dda0"}
+s.source_files  = 'TopScrollTabViewTest/TSTview.{h,m},TopScrollTabViewTest/NSLayoutConstraint+Util.{h,m}'
 s.requires_arc = true
 end
