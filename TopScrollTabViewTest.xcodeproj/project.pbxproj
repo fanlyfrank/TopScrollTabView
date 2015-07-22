@@ -18,6 +18,7 @@
 		6987121D1B5F29AC00B89461 /* TSTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6987121C1B5F29AC00B89461 /* TSTView.m */; };
 		698712201B5F312000B89461 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6987121F1B5F312000B89461 /* UIColor+Util.m */; };
 		698712221B5F433900B89461 /* TopScrollTabView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 698712211B5F433900B89461 /* TopScrollTabView.podspec */; };
+		698712241B5F4CCF00B89461 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 698712231B5F4CCF00B89461 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		6987121E1B5F312000B89461 /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
 		6987121F1B5F312000B89461 /* UIColor+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Util.m"; sourceTree = "<group>"; };
 		698712211B5F433900B89461 /* TopScrollTabView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TopScrollTabView.podspec; sourceTree = "<group>"; };
+		698712231B5F4CCF00B89461 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				698711FF1B5F28D100B89461 /* LaunchScreen.xib */,
 				698711F01B5F28D100B89461 /* Supporting Files */,
 				698712211B5F433900B89461 /* TopScrollTabView.podspec */,
+				698712231B5F4CCF00B89461 /* LICENSE */,
 			);
 			path = TopScrollTabViewTest;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				698711FC1B5F28D100B89461 /* Main.storyboard in Resources */,
 				698712011B5F28D100B89461 /* LaunchScreen.xib in Resources */,
 				698711FE1B5F28D100B89461 /* Images.xcassets in Resources */,
+				698712241B5F4CCF00B89461 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
