@@ -1,6 +1,6 @@
 # TopScrollTabView
 
-A tabview like neteasy news app, 懂球帝 app. you can scroll top tabs and tap tab item to switch the content at the bottom, or you can just swip the bottom content view to switch content.
+A tabview like neteasy news app(网易新闻), 懂球帝 app. you can scroll top tabs and tap tab item to switch the content at the bottom, or you can just swip the bottom content view to switch content.
 
 # Installation
 
@@ -35,4 +35,23 @@ You can use this view just like this:
     [tstview reloadData];
 }
     
+```
+
+# appearance
+
+You can implement TSTView delegate method to define TSTView's appearance
+
+```Objective-c
+
+- (UIColor *)tabViewBackgroundColorForTSTView:(TSTView *)tstview;
+- (UIColor *)highlightColorForTSTView:(TSTView *)tstview;
+- (UIColor *)normalColorForTSTView:(TSTView *)tstview;
+- (UIColor *)normalColorForSeparatorInTSTView:(TSTView *)tstview;
+
+- (CGFloat)heightForTabInTSTView:(TSTView *)tstview;
+- (CGFloat)heightForTabSeparatorInTSTView:(TSTView *)tstview;
+- (CGFloat)heightForSelectedIndicatorInTSTView:(TSTView *)tstview;
+
+- (UIFont *)fontForTabTitleInTSTView:(TSTView *)tstview;
+```
 
