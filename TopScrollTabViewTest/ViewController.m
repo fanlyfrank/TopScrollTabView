@@ -24,7 +24,6 @@
     
     [super viewDidLoad];
     
-    //
     _datas = @{@"yellow" : [UIColor yellowColor],
                @"red" : [UIColor redColor],
                @"blue" : [UIColor blueColor],
