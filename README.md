@@ -37,7 +37,7 @@ You can use this view just like this:
     
 ```
 
-# appearance
+# Appearance
 
 You can implement TSTView delegate method to define TSTView's appearance
 
