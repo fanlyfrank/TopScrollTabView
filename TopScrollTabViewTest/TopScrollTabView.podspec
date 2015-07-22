@@ -11,6 +11,6 @@ s.author       = { "Fanly Frank" => "fanly1987444@126.com" }
 s.platform     = :ios, "6.0"
 s.ios.deployment_target = "8.1"
 s.source       = { :git => "git@github.com:fanlyfrank/TopScrollTabView.git", :tag => s.version}
-s.source_files  = 'TopScrollTabViewTest/TSTview.h,TopScrollTabViewTest/TSTview.m,TopScrollTabViewTest/NSLayoutConstraint+Util.h,TopScrollTabViewTest/NSLayoutConstraint+Util.m}'
+s.source_files  = 'TopScrollTabView/TopScrollTabViewTest/TSTview.h,TopScrollTabView/TopScrollTabViewTest/TSTview.m,TopScrollTabView/TopScrollTabViewTest/NSLayoutConstraint+Util.h,TopScrollTabView/TopScrollTabViewTest/NSLayoutConstraint+Util.m}'
 s.requires_arc = true
 end
