@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "TSTView.h"
 #import "UIColor+Util.h"
+#import "NSLayoutConstraint+Util.h"
 
 @interface ViewController () <TSTViewDataSource, TSTViewDelegate>
 
@@ -23,6 +24,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     _datas = @{@"yellow" : [UIColor yellowColor],
                @"red" : [UIColor redColor],
@@ -34,12 +36,23 @@
     
     _tstView = [[TSTView alloc] initWithFrame:self.view.frame];
     
+    self.tstView.translatesAutoresizingMaskIntoConstraints = NO;
     self.tstView.delegate = self;
     self.tstView.dataSource = self;
     
     [self.tstView registerReusableContentViewClass:[UIView class]];
     
     [self.view addSubview:self.tstView];
+    
+    
+    [NSLayoutConstraint constraintWithItem:self.tstView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0 toView:self.view];
+    
+    [NSLayoutConstraint constraintWithItem:self.tstView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0 toView:self.view];
+    
+    [NSLayoutConstraint constraintWithItem:self.tstView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0 toView:self.view];
+    
+    [NSLayoutConstraint constraintWithItem:self.tstView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0 toView:self.view];
+    
     [self.tstView reloadData];
 }
 

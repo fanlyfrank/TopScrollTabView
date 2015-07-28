@@ -9,6 +9,8 @@
 #import "TSTView.h"
 #import "NSLayoutConstraint+Util.h"
 
+#define kReuseableContentCount 3
+
 @interface TSTView ()
 
 //subviews
@@ -50,6 +52,7 @@
 @property (assign, nonatomic) NSInteger previousSelectedIndex;
 
 @property (assign, nonatomic) BOOL isForwardSwip;
+@property (assign, nonatomic) BOOL isLayoutSubviews;
 
 
 @end
@@ -103,19 +106,53 @@
         
         //init data
         _tabButtons = [[NSMutableArray alloc] initWithCapacity:5];
-        _reuseableContentViews = [[NSMutableArray alloc] initWithCapacity:3];
+        _reuseableContentViews = [[NSMutableArray alloc] initWithCapacity:kReuseableContentCount];
         _previousSelectedIndex = -1;
         _currentSelectedIndex = -1;
         _currentLoadIndex = 0;
         _isForwardSwip = YES;
+        _isLayoutSubviews = NO;
         
     }
     
     return self;
 }
 
-#pragma mark -- public methods
+- (void)layoutSubviews {
+    
+    self.isLayoutSubviews = YES;
+    
+    [super layoutSubviews];
+    
+    self.contentView.contentSize = CGSizeMake(self.contentView.frame.size.width * self.tabsCount, self.contentView.frame.size.height);
+    
+    if (self.reuseableContentViews.count > 0 && self.reuseableContentViews.count < kReuseableContentCount) {
+        
+        [self resizeContentViewFrame:self.currentSelectedIndex];
+        
+        [self resizeContentViewFrame:self.currentSelectedIndex + 1];
+        
+    } else if (self.reuseableContentViews.count >= kReuseableContentCount) {
+        
+        [self resizeContentViewFrame:self.currentSelectedIndex];
+        
+        if ([self hasNextContent])
+            [self resizeContentViewFrame:self.currentSelectedIndex + 1];
+        
+        if ([self hasPreContent])
+            [self resizeContentViewFrame:self.currentSelectedIndex - 1];
+        
+        if ([self isLastPage]) {
+            [self resizeContentViewFrame:self.currentSelectedIndex - 2];
+        }
+        
+        self.contentView.contentOffset = CGPointMake(self.currentSelectedIndex * self.contentView.frame.size.width, 0);
+    }
+    
+    self.isLayoutSubviews = NO;
+}
 
+#pragma mark -- public methods
 - (void)reloadData {
     
     [self updateBasicSubviewsConstraint];
@@ -143,8 +180,8 @@
         abort();
     }
     
-    if (self.reuseableContentViews.count >= 3) {
-        contentView = self.reuseableContentViews[self.currentLoadIndex % 3];
+    if (self.reuseableContentViews.count >= kReuseableContentCount) {
+        contentView = self.reuseableContentViews[self.currentLoadIndex % kReuseableContentCount];
         
         if (![contentView isKindOfClass:self.reuswableContentViewClass]) {
             NSLog(@"content view you provide by methods tstview:viewForSelectedTabIndex:, is not a class you register by methods registerReusableContentViewClass:, pleas make sure they are stay the same!");
@@ -164,15 +201,16 @@
 }
 
 #pragma mark --  scroll view delegate
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    //when device rotated, do noting
+    if (self.isLayoutSubviews) return;
+
     NSInteger currentIndex = round(scrollView.contentOffset.x / scrollView.frame.size.width);
-    
     [self autoScrollTopTabBySwipDirctionToPage:currentIndex];
+   
     
     if (currentIndex == self.previousSelectedIndex) {
-        
         return;
     }
     
@@ -283,7 +321,6 @@
 }
 
 #pragma mark -- logic methods
-
 - (void)loadContentViewByTapTab:(NSInteger)index {
 
     if (index + 1 <= self.tabsCount - 1) {
@@ -332,10 +369,8 @@
 - (void)loadContentViewByIndex:(NSInteger)index {
     
     if (self.dataSource) {
-        UIView *contentView = [self.dataSource tstview:self
-                               viewForSelectedTabIndex:index];
+        UIView *contentView = [self.dataSource tstview:self viewForSelectedTabIndex:index];
         contentView.frame = CGRectMake(index * self.contentView.frame.size.width, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
-        
         [self holdViewIfNecessary:contentView];
     }
 }
@@ -436,6 +471,44 @@
         [self layoutIfNeeded];
     }];
     
+}
+
+- (void)resizeContentViewFrame:(NSInteger)index {
+    UIView *resizeView = self.reuseableContentViews[index % kReuseableContentCount];
+    resizeView.frame = CGRectMake(self.contentView.frame.size.width * index, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
+}
+
+- (BOOL)hasNextContent {
+    
+    BOOL result = NO;
+    
+    if (self.currentSelectedIndex + 1 <= self.tabsCount - 1) {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (BOOL)hasPreContent {
+    
+    BOOL result = NO;
+    
+    if (self.currentSelectedIndex - 1 >= 0) {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (BOOL)isLastPage {
+    
+    BOOL result = NO;
+    
+    if (self.currentSelectedIndex == self.tabsCount - 1) {
+        result = YES;
+    }
+    
+    return result;
 }
 
 #pragma mark -- update constraint methods
@@ -697,7 +770,6 @@
     self.contentView.contentOffset = CGPointMake(self.contentView.frame.size.width * currentIndex, 0);
 
 }
-
 
 - (UIScrollView *)topTabViewInTSTView
 {
