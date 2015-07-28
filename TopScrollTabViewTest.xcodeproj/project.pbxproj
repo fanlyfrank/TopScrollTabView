@@ -456,6 +456,7 @@
 				698712121B5F28D100B89461 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		698712131B5F28D100B89461 /* Build configuration list for PBXNativeTarget "TopScrollTabViewTestTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +465,7 @@
 				698712151B5F28D100B89461 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
