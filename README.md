@@ -7,7 +7,7 @@ A tabview like neteasy news app(网易新闻), 懂球帝 app. you can scroll top
 # Installation
 
 There are tow ways to use TopScrollTabView in your project:
-1, using Cocoapods;
+1, using CocoaPods;
 2, copying TSTView.h,TSTView.m,NSLayoutConstraint+Util.h,NSLayoutConstraint+Util.m to your project.
 
 通过两种方式进行集成：
